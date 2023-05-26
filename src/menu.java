@@ -53,7 +53,7 @@ public class menu extends JPanel {
             // Save bmp in central type
             bmpToPolygon.bmpPath = jfc.getSelectedFile().getName();
         }
-        bTP = new bitmapToPicksel("bmpToPolygon.bmpPath");
+        bTP = new bitmapToPicksel(bmpToPolygon.bmpPath);
     }
 
     // helper function to set a button in "style"

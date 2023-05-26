@@ -1,1 +1,2 @@
 0.01 - Implemented main window and filechooser
+0.02 - read bmp in int-array
