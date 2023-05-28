@@ -13,21 +13,11 @@ public class bitmapToPicksel {
     public bitmapToPicksel(String s) {
         try {
             bfr = ImageIO.read(new File(s));
-            bild = new int[bfr.getHeight()][bfr.getWidth()];
-            // y-dimension
-            for (int x = 0; x < bfr.getHeight(); x++) {
-                // x-dimension
-                for (int y = 0; y < bfr.getWidth(); y++) {
+            bild = new int[bfr.getWidth()][bfr.getHeight()];
+            for (int x = 0; x < bfr.getWidth(); x++) {
+                for (int y = 0; y < bfr.getHeight(); y++) {
                     bild[x][y] = bfr.getRGB(x, y);
                 }
-            }
-
-            for (int x = 0; x < bfr.getHeight(); x++) {
-                // x-dimension
-                for (int y = 0; y < bfr.getWidth(); y++) {
-                    System.out.print(bild[x][y]);
-                }
-                System.out.println();
             }
         } catch (IOException e) {
             System.out.println("Could not get img");
