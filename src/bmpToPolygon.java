@@ -27,6 +27,7 @@ public class bmpToPolygon {
     }
 
     // main class to run program
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         bmpToPolygon b = new bmpToPolygon();
     }

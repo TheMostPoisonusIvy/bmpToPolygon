@@ -27,7 +27,6 @@ public class menu extends JPanel {
         openJFC = setButton("Open bmp-file to read");
         add(openJFC, c);
         openJFC.addActionListener(e -> openFileChooser());
-
     }
 
     // open the file chooser dialog
