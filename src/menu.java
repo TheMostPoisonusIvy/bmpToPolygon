@@ -47,11 +47,13 @@ public class menu extends JPanel {
                 }
             }
         });
-        jfc.showOpenDialog(null);
+
         int returnValue = jfc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             // Save bmp in central type
-            bmpToPolygon.bmpPath = jfc.getSelectedFile().getName();
+            // bmpToPolygon.bmpPath = jfc.getSelectedFile().getName();
+            bmpToPolygon.bmpPath = jfc.getSelectedFile().getAbsolutePath();
+            System.out.println(bmpToPolygon.bmpPath);
         }
         bTP = new bitmapToPicksel(bmpToPolygon.bmpPath);
     }
