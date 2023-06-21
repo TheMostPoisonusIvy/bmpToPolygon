@@ -8,14 +8,18 @@ import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 
 public class menu extends JPanel {
     GridBagConstraints c = new GridBagConstraints();
     Font f = new Font("SansSerif", Font.BOLD, 20);
     JFileChooser jfc;
-    JButton openJFC;
+    JButton openJFC, confirmation;
     bitmapToPicksel bTP;
+    JLabel pixelSize;
+    JComboBox<String> pixelDropDownMenu;
 
     // constructor
     public menu() {
@@ -27,6 +31,27 @@ public class menu extends JPanel {
         openJFC = setButton("Open bmp-file to read");
         add(openJFC, c);
         openJFC.addActionListener(e -> openFileChooser());
+        pixelSize = new JLabel("Select pixelsize");
+        pixelSize.setVisible(true);
+        pixelSize.setFont(f);
+        pixelSize.setOpaque(false);
+        c.gridx = 0;
+        c.gridy = 1;
+        add(pixelSize, c);
+        // TODO: Get choices off of bmp-header
+        String[] choices = { "5m * 5m", "10m * 10m", "15m * 15m", "20m * 20m" };
+        pixelDropDownMenu = new JComboBox<String>(choices);
+        pixelDropDownMenu.setVisible(true);
+        c.gridx = 1;
+        c.gridy = 1;
+        add(pixelDropDownMenu, c);
+
+        confirmation = new JButton("OK");
+        c.gridx = 2;
+        c.gridy = 1;
+        add(confirmation, c);
+        // TODO: Add Actionlistener
+
     }
 
     // open the file chooser dialog
