@@ -56,7 +56,7 @@ public class menu extends JPanel {
 
     // open the file chooser dialog
     public void openFileChooser() {
-        jfc = new JFileChooser();
+        jfc = new JFileChooser("Z:\\workspace Eclipse\\workspace\\PVL-Nachteilsausgleich\\bin");
         jfc.addChoosableFileFilter(new FileFilter() {
             public String getDescription() {
                 return "Bitmaps (*.bmp)";
