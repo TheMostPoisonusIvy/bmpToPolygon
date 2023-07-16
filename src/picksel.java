@@ -3,6 +3,7 @@ package src;
 public class picksel {
     int xKoordinate, yKoordinate, wert;
     int xKoordinateWoher, yKoordinateWoher;
+    Boolean durchsucht;
 
     public picksel() {
     }
@@ -13,5 +14,6 @@ public class picksel {
         this.wert = w;
         this.xKoordinateWoher = xW;
         this.yKoordinateWoher = yW;
+        this.durchsucht = false;
     }
 }
