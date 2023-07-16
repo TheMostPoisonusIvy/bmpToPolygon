@@ -64,6 +64,7 @@ public class pickselToPolygon {
 
     public Vector<picksel> searchForPickselWithSameValueNearTheCurrentOne(picksel p) {
         Vector<picksel> v = new Vector<picksel>(1);
+        v.add(1, p);
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 // TODO: Edgecasehandeling

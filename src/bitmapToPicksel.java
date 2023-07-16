@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 public class bitmapToPicksel {
     public int[][] bild;
+    public picksel[][] pickselBild;
     public int height, width;
     BufferedImage bfr;
     pickselToPolygon p;
@@ -21,6 +22,11 @@ public class bitmapToPicksel {
             for (int x = 0; x < bfr.getWidth(); x++) {
                 for (int y = 0; y < bfr.getHeight(); y++) {
                     this.bild[x][y] = bfr.getRGB(x, y);
+                }
+            }
+            for (int x = 0; x < bfr.getWidth(); x++) {
+                for (int y = 0; y < bfr.getHeight(); y++) {
+                    this.pickselBild[x][y] = new picksel(x, y, this.bild[x][y], 0, 0);
                 }
             }
             /**
