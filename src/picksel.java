@@ -8,12 +8,10 @@ public class picksel {
     public picksel() {
     }
 
-    public picksel(int x, int y, int w, int xW, int yW) {
+    public picksel(int x, int y, int w) {
         this.xKoordinate = x;
         this.yKoordinate = y;
         this.wert = w;
-        this.xKoordinateWoher = xW;
-        this.yKoordinateWoher = yW;
         this.durchsucht = false;
     }
 }

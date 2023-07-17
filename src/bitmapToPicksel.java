@@ -24,20 +24,12 @@ public class bitmapToPicksel {
                     this.bild[x][y] = bfr.getRGB(x, y);
                 }
             }
-
+            this.pickselBild = new picksel[width][height];
             for (int x = 0; x < bfr.getWidth(); x++) {
                 for (int y = 0; y < bfr.getHeight(); y++) {
-                    this.pickselBild[x][y] = new picksel();// new picksel(x, y, bfr.getRGB(x, y), 0, 0);
+                    this.pickselBild[x][y] = new picksel(x, y, this.bild[x][y]);
                 }
             }
-            /**
-             * for (int x = 0; x < bfr.getWidth(); x++) {
-             * for (int y = 0; y < bfr.getHeight(); y++) {
-             * System.out.print(bild[x][y] + " ");
-             * }
-             * System.out.println("");
-             * }
-             */
             p = new pickselToPolygon(this);
         } catch (IOException e) {
             System.out.println("Could not get img");
