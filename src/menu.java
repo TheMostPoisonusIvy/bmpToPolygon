@@ -50,6 +50,7 @@ public class menu extends JPanel {
         c.gridx = 2;
         c.gridy = 1;
         add(confirmation, c);
+        confirmation.addActionListener(e -> confirmation());
         // TODO: Add Actionlistener
 
     }
@@ -77,8 +78,11 @@ public class menu extends JPanel {
             // Save bmp in central type
             // bmpToPolygon.bmpPath = jfc.getSelectedFile().getName();
             bmpToPolygon.bmpPath = jfc.getSelectedFile().getAbsolutePath();
-            System.out.println(bmpToPolygon.bmpPath);
         }
+
+    }
+
+    public void confirmation() {
         bTP = new bitmapToPicksel(bmpToPolygon.bmpPath);
     }
 
