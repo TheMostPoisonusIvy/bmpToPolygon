@@ -39,7 +39,7 @@ public class pickselToPolygon {
     }
 
     public void manageSearch() {
-        // Erstellen lokaler Koordinaten x,y
+        // Erstellen lokaler Koordinaten x,y -> dazugehöriger Picksel
         // so lange die Koordinaten des nächsten Searchclusters nicht bei width+1 und
         // height+1
         // neues Searchcluster bei x,y
@@ -48,10 +48,14 @@ public class pickselToPolygon {
         // berechnen des neuen x / y
     }
 
-    public void newSearchCluster(int xKoordinate, int yKoordinate) {
+    public Vector<picksel> newSearchCluster(picksel p) {
         // Erstellen des übergeordneten Suchclusters
+        Vector<picksel> v = new Vector<>();
         // Beginn ab übergebenen Pixel
+
         // Erstellen des Suchclusters
+        // Rückgabe des Suchclusters
+        return v;
     }
 
     public Vector<picksel> removeDuplicatesFromSearchCluster(Vector<picksel> v) {
@@ -94,6 +98,7 @@ public class pickselToPolygon {
                 // Wenn der Suchpixel den gleichen Wert wie der aktuelle Pixel hat
                 if (bmpToPick.bild[x + i][x + j] == bmpToPick.bild[x][y]) {
                     v.add(bmpToPick.pickselBild[x + i][x + j]);
+                    v.elementAt(v.size()).durchsucht = true;
                 }
             }
         }
