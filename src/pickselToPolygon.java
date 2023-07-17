@@ -1,18 +1,11 @@
 package src;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
-import javax.imageio.ImageIO;
 
 public class pickselToPolygon {
     public bitmapToPicksel bmpToPick;
-    int x, y;
 
     public pickselToPolygon(bitmapToPicksel b) {
         this.bmpToPick = b;
@@ -69,6 +62,6 @@ public class pickselToPolygon {
             }
         }
         // do whatever with the clusters
-        System.out.println("success");
+        System.out.println(clusters.size());
     }
 }

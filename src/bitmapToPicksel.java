@@ -19,10 +19,10 @@ public class bitmapToPicksel {
             this.bild = new int[bfr.getWidth()][bfr.getHeight()];
             this.height = bfr.getHeight();
             this.width = bfr.getWidth();
-            Pixel[][] pixels = new Pixel[width][height];
+            this.pickselBild = new Pixel[width][height];
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    pixels[x][y] = new Pixel(x, y, bfr.getRGB(x, y));
+                    this.pickselBild[x][y] = new Pixel(x, y, bfr.getRGB(x, y));
                 }
             }
             p = new pickselToPolygon(this);
