@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class bitmapToPicksel {
-    public int[][] bild;
     public Pixel[][] pickselBild;
     public int height, width;
     BufferedImage bfr;
@@ -16,7 +15,6 @@ public class bitmapToPicksel {
     public bitmapToPicksel(String s) {
         try {
             this.bfr = ImageIO.read(new File(s));
-            this.bild = new int[bfr.getWidth()][bfr.getHeight()];
             this.height = bfr.getHeight();
             this.width = bfr.getWidth();
             this.pickselBild = new Pixel[width][height];

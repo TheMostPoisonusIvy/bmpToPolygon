@@ -39,7 +39,7 @@ public class pickselToPolygon {
                 s.add(bmpToPick.pickselBild[x][y]);
                 while (!s.empty()) {
                     Pixel p = s.pop();
-                    if (p.checked || col != p.getColor())
+                    if (p.isChecked() || col != p.getColor())
                         continue;
                     cluster.add(p);
                     p.check();

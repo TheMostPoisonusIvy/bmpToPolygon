@@ -4,7 +4,7 @@ public class Pixel {
     private final int x;
     private final int y;
     private final int color;
-    public boolean checked;
+    private boolean checked;
 
     public Pixel(int x, int y, int color) {
         this.x = x;
