@@ -69,5 +69,6 @@ public class pickselToPolygon {
             }
         }
         // do whatever with the clusters
+        System.out.println("success");
     }
 }
