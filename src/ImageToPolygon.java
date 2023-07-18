@@ -5,10 +5,10 @@ import java.util.Stack;
 import java.util.TreeSet;
 
 public class ImageToPolygon {
-    public bitmapToPicksel bmpToPick;
+    public MitmapToPixelArray bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
 
-    public ImageToPolygon(bitmapToPicksel b) {
+    public ImageToPolygon(MitmapToPixelArray b) {
         this.bmpToPick = b;
         // Bilden der Gruppen
         manageSearch();

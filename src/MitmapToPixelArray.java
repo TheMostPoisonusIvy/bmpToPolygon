@@ -6,14 +6,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class bitmapToPicksel {
+public class MitmapToPixelArray {
     public Pixel[][] pickselBild;
     public int height, width;
     public float pixelSize;
     BufferedImage bfr;
     ImageToPolygon p;
 
-    public bitmapToPicksel(String s, float size) {
+    public MitmapToPixelArray(String s, float size) {
         try {
             this.pixelSize = size;
             System.out.println(size);

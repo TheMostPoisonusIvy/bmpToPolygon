@@ -5,6 +5,6 @@ package src;
  * 
  * @author
  */
-public class workstationScreen {
+public class ProgressScreen {
 
 }

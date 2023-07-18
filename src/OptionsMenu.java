@@ -14,18 +14,18 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class menu extends JPanel {
+public class OptionsMenu extends JPanel {
     GridBagConstraints c = new GridBagConstraints();
     Font f = new Font("SansSerif", Font.BOLD, 20);
     JFileChooser jfc;
     JButton openJFC, confirmation;
-    bitmapToPicksel bTP;
+    MitmapToPixelArray bTP;
     JLabel pixelSize;
     float pixelGroesse;
     JTextField pixelSizeInput;
 
     // constructor
-    public menu() {
+    public OptionsMenu() {
         setLayout(new GridBagLayout());
         setBackground(Color.GRAY);
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -81,7 +81,7 @@ public class menu extends JPanel {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             // Save bmp in central type
             // bmpToPolygon.bmpPath = jfc.getSelectedFile().getName();
-            bmpToPolygon.bmpPath = jfc.getSelectedFile().getAbsolutePath();
+            BitmapToPolygon.bmpPath = jfc.getSelectedFile().getAbsolutePath();
         }
 
     }
@@ -92,13 +92,13 @@ public class menu extends JPanel {
             try {
                 pixelGroesse = Float.parseFloat(f);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(bmpToPolygon.frame,
+                JOptionPane.showMessageDialog(BitmapToPolygon.frame,
                         "Die eingegebene Zahl wurde nicht erkannt. Bitte versuchen Sie es erneut",
                         "Error",
                         JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(bmpToPolygon.frame,
+            JOptionPane.showMessageDialog(BitmapToPolygon.frame,
                     "Das sollte nicht passieren. Bitte versuchen Sie es erneut",
                     "Error",
                     JOptionPane.WARNING_MESSAGE);
@@ -106,12 +106,12 @@ public class menu extends JPanel {
     }
 
     public void confirmation() {
-        if (bmpToPolygon.bmpPath != null) {
+        if (BitmapToPolygon.bmpPath != null) {
             confirmDoubleInput();
-            bTP = new bitmapToPicksel(bmpToPolygon.bmpPath,
+            bTP = new MitmapToPixelArray(BitmapToPolygon.bmpPath,
                     pixelGroesse);
         } else {
-            JOptionPane.showMessageDialog(bmpToPolygon.frame, "Bitte wählen Sie eine Datei aus",
+            JOptionPane.showMessageDialog(BitmapToPolygon.frame, "Bitte wählen Sie eine Datei aus",
                     "Error",
                     JOptionPane.WARNING_MESSAGE);
         }

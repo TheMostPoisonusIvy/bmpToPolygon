@@ -3,16 +3,16 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 
-public class bmpToPolygon {
+public class BitmapToPolygon {
     public static double version = 0.02;
     public static JFrame frame;
-    public menu mainMenu;
+    public OptionsMenu mainMenu;
     public static JPanel mainPanel;
     public static int height, width;
     public static String bmpPath = null;
 
     // Constructor
-    public bmpToPolygon() {
+    public BitmapToPolygon() {
         frame = new JFrame("bmpToPolygon v" + version);
         frame.setSize(800, 400);
         height = frame.getHeight();
@@ -20,7 +20,7 @@ public class bmpToPolygon {
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(0, 0);
-        mainMenu = new menu();
+        mainMenu = new OptionsMenu();
         mainPanel = mainMenu;
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.setVisible(true);
@@ -29,6 +29,6 @@ public class bmpToPolygon {
     // main class to run program
     @SuppressWarnings("unused")
     public static void main(String[] args) {
-        bmpToPolygon b = new bmpToPolygon();
+        BitmapToPolygon b = new BitmapToPolygon();
     }
 }
