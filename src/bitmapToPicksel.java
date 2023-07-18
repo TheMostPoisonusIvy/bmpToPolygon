@@ -9,11 +9,14 @@ import javax.imageio.ImageIO;
 public class bitmapToPicksel {
     public Pixel[][] pickselBild;
     public int height, width;
+    public float pixelSize;
     BufferedImage bfr;
     pickselToPolygon p;
 
-    public bitmapToPicksel(String s) {
+    public bitmapToPicksel(String s, float size) {
         try {
+            this.pixelSize = size;
+            System.out.println(size);
             this.bfr = ImageIO.read(new File(s));
             this.height = bfr.getHeight();
             this.width = bfr.getWidth();

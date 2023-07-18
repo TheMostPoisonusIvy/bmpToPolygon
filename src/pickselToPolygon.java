@@ -6,27 +6,26 @@ import java.util.TreeSet;
 
 public class pickselToPolygon {
     public bitmapToPicksel bmpToPick;
+    LinkedList<TreeSet<Pixel>> clusters;
 
     public pickselToPolygon(bitmapToPicksel b) {
         this.bmpToPick = b;
+        // Bilden der Gruppen
         manageSearch();
-        // beginnen beim obersten linken Pixel
-
-        // Bilden einer Gruppe
-
-        // speichern der Gruppe
-
-        // nordwestlichsten Pixel ohne Gruppe suchen
-
-        // Bilden einer Gruppe usw.
-        // TODO: Ganz am Ende Duplikate noch einmal aus dem kompletten Vektor entfernen
-
         // Erkennen der Kanten der Gruppen
+
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
+
+        // TODO: Beenden des Programmes
+        System.exit(-1);
+    }
+
+    public void searchEdges() {
+
     }
 
     public void manageSearch() {
-        LinkedList<TreeSet<Pixel>> clusters = new LinkedList<>();
+        clusters = new LinkedList<>();
         for (int y = 0; y < bmpToPick.height; y++) {
             for (int x = 0; x < bmpToPick.width; x++) {
                 if (bmpToPick.pickselBild[x][y].isChecked()) {

@@ -5,12 +5,16 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
+import java.text.NumberFormat;
+
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class menu extends JPanel {
     GridBagConstraints c = new GridBagConstraints();
@@ -19,7 +23,8 @@ public class menu extends JPanel {
     JButton openJFC, confirmation;
     bitmapToPicksel bTP;
     JLabel pixelSize;
-    JComboBox<String> pixelDropDownMenu;
+    float pixelGroesse;
+    JTextField pixelSizeInput;
 
     // constructor
     public menu() {
@@ -31,24 +36,25 @@ public class menu extends JPanel {
         openJFC = setButton("Open bmp-file to read");
         add(openJFC, c);
         openJFC.addActionListener(e -> openFileChooser());
-        pixelSize = new JLabel("Select pixelsize");
+        pixelSize = new JLabel("Pixelgröße in Metern (mit Dezimalpunkt)");
         pixelSize.setVisible(true);
         pixelSize.setFont(f);
         pixelSize.setOpaque(false);
         c.gridx = 0;
         c.gridy = 1;
         add(pixelSize, c);
-        // TODO: Get choices off of bmp-header
-        String[] choices = { "5m * 5m", "10m * 10m", "15m * 15m", "20m * 20m" };
-        pixelDropDownMenu = new JComboBox<String>(choices);
-        pixelDropDownMenu.setVisible(true);
+
+        pixelSizeInput = new JTextField();
+        pixelSizeInput.setColumns(10);
+        pixelSizeInput.setEditable(true);
+
         c.gridx = 1;
         c.gridy = 1;
-        add(pixelDropDownMenu, c);
+        add(pixelSizeInput, c);
 
         confirmation = new JButton("OK");
         c.gridx = 2;
-        c.gridy = 1;
+        c.gridy = 2;
         add(confirmation, c);
         confirmation.addActionListener(e -> confirmation());
         // TODO: Add Actionlistener
@@ -82,8 +88,36 @@ public class menu extends JPanel {
 
     }
 
+    public void confirmDoubleInput() {
+        try {
+            String f = pixelSizeInput.getText();
+            try {
+                pixelGroesse = Float.parseFloat(f);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(bmpToPolygon.frame,
+                        "Die eingegebene Zahl wurde nicht erkannt. Bitte versuchen Sie es erneut",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(bmpToPolygon.frame,
+                    "Das sollte nicht passieren. Bitte versuchen Sie es erneut",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public void confirmation() {
-        bTP = new bitmapToPicksel(bmpToPolygon.bmpPath);
+        if (bmpToPolygon.bmpPath != null) {
+            confirmDoubleInput();
+            bTP = new bitmapToPicksel(bmpToPolygon.bmpPath,
+                    pixelGroesse);
+        } else {
+            JOptionPane.showMessageDialog(bmpToPolygon.frame, "Bitte wählen Sie eine Datei aus",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     // helper function to set a button in "style"

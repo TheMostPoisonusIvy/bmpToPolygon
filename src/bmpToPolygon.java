@@ -5,11 +5,11 @@ import javax.swing.*;
 
 public class bmpToPolygon {
     public static double version = 0.02;
-    private JFrame frame;
+    public static JFrame frame;
     public menu mainMenu;
     public static JPanel mainPanel;
     public static int height, width;
-    public static String bmpPath;
+    public static String bmpPath = null;
 
     // Constructor
     public bmpToPolygon() {
