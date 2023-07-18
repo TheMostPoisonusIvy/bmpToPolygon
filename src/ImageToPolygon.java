@@ -25,7 +25,11 @@ public class ImageToPolygon {
     }
 
     public void searchEdges() {
+        for (TreeSet<Pixel> cluster : clusters) {
+            // nordwestlichster, nordöstlichster, südwestlichsten und südöstlichsten Punkt
+            // des umgebenden Rechtecks finden
 
+        }
     }
 
     public void manageSearch() {
