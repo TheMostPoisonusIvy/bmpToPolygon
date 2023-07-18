@@ -1,3 +1,4 @@
 0.01 - Implemented main window and filechooser
 0.02 - added further interface options
 0.03 - read bmp in int-array
+0.04 - detection of cluster and detection of cornerpoints

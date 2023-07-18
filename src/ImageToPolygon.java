@@ -7,14 +7,22 @@ import java.util.TreeSet;
 public class ImageToPolygon {
     public BitmapToPixelArray bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
-    LinkedList<TreeSet<PixelCluster>> pixelClusters;
+    LinkedList<TreeSet<Pixel>> cornerPointCluster = new LinkedList<TreeSet<Pixel>>();
 
     public ImageToPolygon(BitmapToPixelArray b) {
         this.bmpToPick = b;
         // Bilden der Gruppen
         manageSearch();
         // Erkennen der Kanten der Gruppen
-        searchEdges();
+        for (TreeSet<Pixel> cluster : clusters) {
+            this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
+        }
+        for (TreeSet<Pixel> cluster : cornerPointCluster) {
+            System.out.println("");
+            for (Pixel p : cluster) {
+                System.out.print(p.getX() + " / " + p.getY() + "; ");
+            }
+        }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToPolygon();
         // TODO: Beenden des Programmes
@@ -25,29 +33,51 @@ public class ImageToPolygon {
 
     }
 
-    public void searchEdges() {
-        pixelClusters = new LinkedList<>();
-        for (TreeSet<Pixel> cluster : clusters) {
-            // umwandeln in ein Pixelcluster
-            // PixelCluster tempPixClus = new PixelCluster(cluster);
-            // nordwestlichster, nordöstlichster, südwestlichsten und südöstlichsten Punkt
-            // des umgebenden Rechtecks finden
-            // tempPixClus.findCornerOfSurroundingRectangleCoordinates();
-            // erstellen der Liste der Eckpunkte für das aktuelle Cluster
-            // tempPixClus.findCornerPoints(bmpToPick.pixelSize);
-            System.out.println(clusterToPolygonCorners(cluster));
+    public void orderPolygonCornersToPolygon(TreeSet<Pixel> cornerPointCluster) {
+        // Testen in welche Richtung die Kante / Grenze verläuft
+
+    }
+
+    public void getDirectionOfPolygonEdge() {
+
+    }
+
+    public TreeSet<Pixel> clusterToPolygonCorners(TreeSet<Pixel> cluster) {
+        TreeSet<Pixel> polygonCorners = new TreeSet<>();
+        for (Pixel p : cluster) {
+            tryAdd(cluster, polygonCorners, new Pixel(p.getX(), p.getY()));
+            tryAdd(cluster, polygonCorners, new Pixel(p.getX() + 1, p.getY()));
+            tryAdd(cluster, polygonCorners, new Pixel(p.getX(), p.getY() + 1));
+            tryAdd(cluster, polygonCorners, new Pixel(p.getX() + 1, p.getY() + 1));
+        }
+        return polygonCorners;
+    }
+
+    // helper function for clusterToPolygonCorners
+    private void tryAdd(TreeSet<Pixel> cluster, TreeSet<Pixel> polygonCorners, Pixel p) {
+        int count = 0;
+        if (cluster.contains(new Pixel(p.getX(), p.getY())))
+            count++;
+        if (cluster.contains(new Pixel(p.getX() - 1, p.getY() - 1)))
+            count++;
+        if (cluster.contains(new Pixel(p.getX() - 1, p.getY())))
+            count--;
+        if (cluster.contains(new Pixel(p.getX(), p.getY() - 1)))
+            count--;
+        if (count != 0) {
+            polygonCorners.add(p);
         }
     }
 
     public void manageSearch() {
-        clusters = new LinkedList<>();
+        this.clusters = new LinkedList<>();
         for (int y = 0; y < bmpToPick.height; y++) {
             for (int x = 0; x < bmpToPick.width; x++) {
                 if (bmpToPick.pickselBild[x][y].isChecked()) {
                     continue;
                 }
                 TreeSet<Pixel> cluster = new TreeSet<>(new PointComparator());
-                clusters.add(cluster);
+                this.clusters.add(cluster);
                 Stack<Pixel> s = new Stack<>();
                 int col = bmpToPick.pickselBild[x][y].getColor();
                 s.add(bmpToPick.pickselBild[x][y]);
@@ -76,6 +106,6 @@ public class ImageToPolygon {
             }
         }
         // do whatever with the clusters
-        System.out.println(clusters.size());
+        System.out.println(this.clusters.size());
     }
 }

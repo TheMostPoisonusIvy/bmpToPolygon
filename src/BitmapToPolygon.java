@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class BitmapToPolygon {
-    public static double version = 0.02;
+    public static double version = 0.04;
     public static JFrame frame;
     public OptionsMenu mainMenu;
     public static JPanel mainPanel;

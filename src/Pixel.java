@@ -1,6 +1,8 @@
 package src;
 
-public class Pixel {
+import java.util.Objects;
+
+public class Pixel implements Comparable<Pixel> {
     private final int x;
     private final int y;
     private final int color;
@@ -43,5 +45,27 @@ public class Pixel {
     @Override
     public String toString() {
         return "(" + x + ", " + y + ": " + color + ")";
+    }
+
+    @Override
+    public int compareTo(Pixel o) {
+        if (this.x == o.x)
+            return Integer.compare(this.y, o.y);
+        return Integer.compare(this.x, o.x);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Pixel pixel = (Pixel) o;
+        return x == pixel.x && y == pixel.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
