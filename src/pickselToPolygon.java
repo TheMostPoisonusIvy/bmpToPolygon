@@ -13,11 +13,15 @@ public class pickselToPolygon {
         // Bilden der Gruppen
         manageSearch();
         // Erkennen der Kanten der Gruppen
-
+        searchEdges();
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
-
+        safeToPolygon();
         // TODO: Beenden des Programmes
         System.exit(-1);
+    }
+
+    public void safeToPolygon() {
+
     }
 
     public void searchEdges() {
