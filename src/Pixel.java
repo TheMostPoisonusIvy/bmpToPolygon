@@ -13,6 +13,13 @@ public class Pixel {
         this.checked = false;
     }
 
+    public Pixel(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.color = 0;
+        this.checked = false;
+    }
+
     public int getColor() {
         return color;
     }

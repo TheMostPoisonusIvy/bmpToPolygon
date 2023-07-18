@@ -19,7 +19,7 @@ public class OptionsMenu extends JPanel {
     Font f = new Font("SansSerif", Font.BOLD, 20);
     JFileChooser jfc;
     JButton openJFC, confirmation;
-    MitmapToPixelArray bTP;
+    BitmapToPixelArray bTP;
     JLabel pixelSize;
     float pixelGroesse;
     JTextField pixelSizeInput;
@@ -108,7 +108,7 @@ public class OptionsMenu extends JPanel {
     public void confirmation() {
         if (BitmapToPolygon.bmpPath != null) {
             confirmDoubleInput();
-            bTP = new MitmapToPixelArray(BitmapToPolygon.bmpPath,
+            bTP = new BitmapToPixelArray(BitmapToPolygon.bmpPath,
                     pixelGroesse);
         } else {
             JOptionPane.showMessageDialog(BitmapToPolygon.frame, "Bitte wählen Sie eine Datei aus",

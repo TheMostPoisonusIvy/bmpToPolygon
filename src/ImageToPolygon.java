@@ -5,10 +5,11 @@ import java.util.Stack;
 import java.util.TreeSet;
 
 public class ImageToPolygon {
-    public MitmapToPixelArray bmpToPick;
+    public BitmapToPixelArray bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
+    LinkedList<TreeSet<PixelCluster>> pixelClusters;
 
-    public ImageToPolygon(MitmapToPixelArray b) {
+    public ImageToPolygon(BitmapToPixelArray b) {
         this.bmpToPick = b;
         // Bilden der Gruppen
         manageSearch();
@@ -25,10 +26,16 @@ public class ImageToPolygon {
     }
 
     public void searchEdges() {
+        pixelClusters = new LinkedList<>();
         for (TreeSet<Pixel> cluster : clusters) {
+            // umwandeln in ein Pixelcluster
+            // PixelCluster tempPixClus = new PixelCluster(cluster);
             // nordwestlichster, nordöstlichster, südwestlichsten und südöstlichsten Punkt
             // des umgebenden Rechtecks finden
-
+            // tempPixClus.findCornerOfSurroundingRectangleCoordinates();
+            // erstellen der Liste der Eckpunkte für das aktuelle Cluster
+            // tempPixClus.findCornerPoints(bmpToPick.pixelSize);
+            System.out.println(clusterToPolygonCorners(cluster));
         }
     }
 
