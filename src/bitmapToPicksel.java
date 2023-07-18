@@ -11,7 +11,7 @@ public class bitmapToPicksel {
     public int height, width;
     public float pixelSize;
     BufferedImage bfr;
-    pickselToPolygon p;
+    ImageToPolygon p;
 
     public bitmapToPicksel(String s, float size) {
         try {
@@ -26,7 +26,7 @@ public class bitmapToPicksel {
                     this.pickselBild[x][y] = new Pixel(x, y, bfr.getRGB(x, y));
                 }
             }
-            p = new pickselToPolygon(this);
+            p = new ImageToPolygon(this);
         } catch (IOException e) {
             System.out.println("Could not get img");
         }

@@ -4,11 +4,11 @@ import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
 
-public class pickselToPolygon {
+public class ImageToPolygon {
     public bitmapToPicksel bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
 
-    public pickselToPolygon(bitmapToPicksel b) {
+    public ImageToPolygon(bitmapToPicksel b) {
         this.bmpToPick = b;
         // Bilden der Gruppen
         manageSearch();
