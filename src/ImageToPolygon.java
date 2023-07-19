@@ -1,13 +1,14 @@
 package src;
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeSet;
 
 public class ImageToPolygon {
     public BitmapToPixelArray bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
-    LinkedList<TreeSet<Pixel>> cornerPointCluster = new LinkedList<TreeSet<Pixel>>();
+    LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointCluster = new LinkedList<>();
 
     public ImageToPolygon(BitmapToPixelArray b) {
         this.bmpToPick = b;
@@ -17,10 +18,13 @@ public class ImageToPolygon {
         for (TreeSet<Pixel> cluster : clusters) {
             this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
         }
+        for (LinkedList<LinkedList<Pixel>> p: cornerPointCluster) {
+            System.out.println(p);
+        }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToPolygon();
         // TODO: Beenden des Programmes
-        System.exit(-1);
+        System.exit(200);
     }
 
     public void safeToPolygon() {
@@ -36,7 +40,97 @@ public class ImageToPolygon {
 
     }
 
-    public TreeSet<Pixel> clusterToPolygonCorners(TreeSet<Pixel> cluster) {
+    public LinkedList<LinkedList<Pixel>> clusterToPolygonCorners(TreeSet<Pixel> cluster){
+        TreeSet<Pixel> cornerPoints = clusterToPolygonCornerPoints(cluster);
+        TreeSet<Pixel> unUsed = clusterToPolygonCornerPoints(cluster);
+
+        // First Polygon in List will be outer Edge
+        // Later ones are inner Polygons
+        LinkedList<LinkedList<Pixel>> polygons = new LinkedList<>();
+
+        while (unUsed.size() != 0) {
+            LinkedList<Pixel> currentPoly = new LinkedList<>();
+            polygons.add(currentPoly);
+            Pixel startAndEnd = unUsed.first();
+            Pixel p = unUsed.first();
+
+
+            // logic for setting a valid starting direction
+            boolean lu = cluster.contains(new Pixel(p.getX()-1, p.getY()-1));
+            boolean ld = cluster.contains(new Pixel(p.getX()-1, p.getY()));
+            boolean ru = cluster.contains(new Pixel(p.getX(), p.getY()-1));
+            boolean rd = cluster.contains(new Pixel(p.getX(), p.getY()));
+            boolean edgeCase = (!lu && ld && ru && !rd) || (lu && !ld && !ru && rd);
+            int ix, iy;
+            if (edgeCase || (rd && ld)){
+                ix = 0;
+                iy = 1;
+            } else if (ru && lu) {
+                ix = 0;
+                iy = -1;
+            } else if (ru || lu) {
+                ix = 0;
+                iy = 1;
+            } else {
+                ix = 0;
+                iy = -1;
+            }
+
+            while(!p.equals(startAndEnd) || currentPoly.isEmpty()){
+                if (cornerPoints.contains(p)){
+                    currentPoly.add(p);
+                    lu = cluster.contains(new Pixel(p.getX()-1, p.getY()-1));
+                    ld = cluster.contains(new Pixel(p.getX()-1, p.getY()));
+                    ru = cluster.contains(new Pixel(p.getX(), p.getY()-1));
+                    rd = cluster.contains(new Pixel(p.getX(), p.getY()));
+                    edgeCase = (!lu && ld && ru && !rd) || (lu && !ld && !ru && rd);
+                    if (ix == 1){
+                        ix = 0;
+                        if (edgeCase){
+                            iy = ru ? -1 : 1;
+                        } else if (ru && rd){
+                            iy = lu ? 1 : -1;
+                        } else {
+                            iy = lu ? -1 : 1;
+                        }
+                    } else if (ix == -1){
+                        ix = 0;
+                        if (edgeCase){
+                            iy = ru ? 1 : -1;
+                        } else if (lu && ld){
+                            iy = ru ? 1 : -1;
+                        } else {
+                            iy = ru ? -1 : 1;
+                        }
+                    } else if (iy == 1){
+                        iy = 0;
+                        if (edgeCase){
+                            ix = ru ? -1 : 1;
+                        } else if (rd && ld){
+                            ix = ru ? -1 : 1;
+                        } else {
+                            ix = ru ? 1 : -1;
+                        }
+                    } else if (iy == -1){
+                        iy = 0;
+                        if (edgeCase){
+                            ix = ru ? 1 : -1;
+                        } else if (ru && lu){
+                            ix = rd ? -1 : 1;
+                        } else {
+                            ix = rd ? 1 : -1;
+                        }
+                    }
+                }
+                p = new Pixel(p.getX() + ix, p.getY() + iy);
+                System.out.println(p);
+            }
+            currentPoly.forEach(unUsed::remove);
+        }
+        return polygons;
+    }
+
+    public TreeSet<Pixel> clusterToPolygonCornerPoints(TreeSet<Pixel> cluster) {
         TreeSet<Pixel> polygonCorners = new TreeSet<>();
         for (Pixel p : cluster) {
             tryAdd(cluster, polygonCorners, new Pixel(p.getX(), p.getY()));

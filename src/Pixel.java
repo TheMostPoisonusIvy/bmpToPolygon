@@ -49,9 +49,9 @@ public class Pixel implements Comparable<Pixel> {
 
     @Override
     public int compareTo(Pixel o) {
-        if (this.x == o.x)
-            return Integer.compare(this.y, o.y);
-        return Integer.compare(this.x, o.x);
+        if (this.y == o.y)
+            return Integer.compare(this.x, o.x);
+        return Integer.compare(this.y, o.y);
     }
 
     @Override
