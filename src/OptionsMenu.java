@@ -1,15 +1,19 @@
 package src;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
 
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,40 +27,48 @@ public class OptionsMenu extends JPanel {
     JLabel pixelSize;
     float pixelGroesse;
     JTextField pixelSizeInput;
+    public JProgressBar calcProgress;
+
+    public void formatC(int x, int y) {
+        c.gridx = x;
+        c.gridy = y;
+    }
 
     // constructor
     public OptionsMenu() {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+
+        JPanel container = new JPanel();
+        container.setLayout(new GridBagLayout());
+        c.anchor = GridBagConstraints.NORTHWEST;
         setBackground(Color.GRAY);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
+
         openJFC = setButton("Open bmp-file to read");
-        add(openJFC, c);
+        container.add(openJFC, c);
         openJFC.addActionListener(e -> openFileChooser());
+
+        formatC(0, 1);
         pixelSize = new JLabel("Pixelgröße in Metern (mit Dezimalpunkt)");
         pixelSize.setVisible(true);
         pixelSize.setFont(f);
         pixelSize.setOpaque(false);
-        c.gridx = 0;
-        c.gridy = 1;
-        add(pixelSize, c);
+        container.add(pixelSize, c);
 
+        formatC(1, 1);
         pixelSizeInput = new JTextField();
         pixelSizeInput.setColumns(10);
         pixelSizeInput.setEditable(true);
+        container.add(pixelSizeInput, c);
 
-        c.gridx = 1;
-        c.gridy = 1;
-        add(pixelSizeInput, c);
-
+        formatC(2, 3);
         confirmation = new JButton("OK");
-        c.gridx = 2;
-        c.gridy = 2;
-        add(confirmation, c);
+        container.add(confirmation, c);
         confirmation.addActionListener(e -> confirmation());
-        // TODO: Add Actionlistener
 
+        calcProgress = new JProgressBar(0, 100);
+        calcProgress.setBounds(0, 0, BitmapToPolygon.width, 100);
+        add(container, BorderLayout.NORTH);
+        add(calcProgress, BorderLayout.SOUTH);
     }
 
     // open the file chooser dialog
@@ -109,7 +121,8 @@ public class OptionsMenu extends JPanel {
         if (BitmapToPolygon.bmpPath != null) {
             confirmDoubleInput();
             bTP = new BitmapToPixelArray(BitmapToPolygon.bmpPath,
-                    pixelGroesse);
+                    pixelGroesse, calcProgress);
+
         } else {
             JOptionPane.showMessageDialog(BitmapToPolygon.frame, "Bitte wählen Sie eine Datei aus",
                     "Error",
@@ -127,5 +140,13 @@ public class OptionsMenu extends JPanel {
         j.setContentAreaFilled(false);
         j.setBorderPainted(false);
         return j;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        // backGround = backGround.getScaledInstance(getParent().getWidth(),
+        // getParent().getHeight(), ABORT);
+        super.paintComponent(g);
+        // g.drawImage(backGround, 0, 0, null);
     }
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JProgressBar;
 
 public class BitmapToPixelArray {
     public Pixel[][] pickselBild;
@@ -12,9 +13,11 @@ public class BitmapToPixelArray {
     public float pixelSize;
     BufferedImage bfr;
     ImageToPolygon p;
+    JProgressBar j;
 
-    public BitmapToPixelArray(String s, float size) {
+    public BitmapToPixelArray(String s, float size, JProgressBar jPro) {
         try {
+            this.j = jPro;
             this.pixelSize = size;
             System.out.println(size);
             this.bfr = ImageIO.read(new File(s));

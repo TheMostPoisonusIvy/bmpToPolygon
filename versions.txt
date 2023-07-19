@@ -6,4 +6,5 @@
 0.06 - GUI finished
 
 Planing
-0.10 - Possibility to export the colors of the polygons in a seperate .csv-File
+0.10 - calc multiple images without restarting program
+0.11 - Possibility to export the colors of the polygons in a seperate .csv-File

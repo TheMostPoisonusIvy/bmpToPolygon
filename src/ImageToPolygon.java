@@ -3,6 +3,11 @@ package src;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JPanel;
 
 /**
  * The main calculation class to transform the bitmap to transform the Bitmap to
@@ -22,20 +27,21 @@ public class ImageToPolygon {
         // Bilden der Gruppen
         manageSearch();
         // Erkennen der Kanten der Gruppen
+        int iterations = 0;
         for (TreeSet<Pixel> cluster : clusters) {
             this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
+            iterations++;
+            bmpToPick.j.setValue((((100 * iterations / clusters.size())) / 2) + 50);
         }
-        for (LinkedList<LinkedList<Pixel>> p : cornerPointCluster) {
-            System.out.println(p);
-        }
+
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToCSV(cornerPointCluster);
         // TODO: Beenden des Programmes
-        System.exit(200);
+        // System.exit(200);
     }
 
     public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
-
+        System.out.println("Finished");
     }
 
     public LinkedList<LinkedList<Pixel>> clusterToPolygonCorners(TreeSet<Pixel> cluster) {
@@ -45,7 +51,6 @@ public class ImageToPolygon {
         // First Polygon in List will be outer Edge
         // Later ones are inner Polygons
         LinkedList<LinkedList<Pixel>> polygons = new LinkedList<>();
-
         while (unUsed.size() != 0) {
             LinkedList<Pixel> currentPoly = new LinkedList<>();
             polygons.add(currentPoly);
@@ -120,9 +125,11 @@ public class ImageToPolygon {
                     }
                 }
                 p = new Pixel(p.getX() + ix, p.getY() + iy);
-                System.out.println(p);
+                // System.out.println(p);
             }
             currentPoly.forEach(unUsed::remove);
+            // bmpToPick.j.setValue((100 * y / y));
+            // rambazamba
         }
         return polygons;
     }
@@ -189,7 +196,7 @@ public class ImageToPolygon {
                     }
                 }
             }
-            System.out.println("Progress: " + 100 * y / bmpToPick.height + "%");
+            bmpToPick.j.setValue((100 * y / bmpToPick.height) / 2);
         }
         System.out.println("Progress: " + 100 + "%");
         System.out.println(clusters.size() + " clusters detected");
