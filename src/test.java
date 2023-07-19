@@ -1,7 +1,9 @@
 package src;
 
 /**
+ * Testclass to circumvent the GUI
  * 
+ * @author szwiletitsch
  */
 
 public class test {

@@ -4,6 +4,14 @@ import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
 
+/**
+ * The main calculation class to transform the bitmap to transform the Bitmap to
+ * the wanted .csv-file
+ * 
+ * @author szwiletitsch
+ * @author TheMostPoisonusIvy
+ */
+
 public class ImageToPolygon {
     public BitmapToPixelArray bmpToPick;
     LinkedList<TreeSet<Pixel>> clusters;
@@ -21,21 +29,12 @@ public class ImageToPolygon {
             System.out.println(p);
         }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
-        safeToPolygon();
+        safeToCSV(cornerPointCluster);
         // TODO: Beenden des Programmes
         System.exit(200);
     }
 
-    public void safeToPolygon() {
-
-    }
-
-    public void orderPolygonCornersToPolygon(TreeSet<Pixel> cornerPointCluster) {
-        // Testen in welche Richtung die Kante / Grenze verläuft
-
-    }
-
-    public void getDirectionOfPolygonEdge() {
+    public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
 
     }
 
