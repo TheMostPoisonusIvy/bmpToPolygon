@@ -1,7 +1,6 @@
 package src;
 
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeSet;
 
@@ -18,7 +17,7 @@ public class ImageToPolygon {
         for (TreeSet<Pixel> cluster : clusters) {
             this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
         }
-        for (LinkedList<LinkedList<Pixel>> p: cornerPointCluster) {
+        for (LinkedList<LinkedList<Pixel>> p : cornerPointCluster) {
             System.out.println(p);
         }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
@@ -40,7 +39,7 @@ public class ImageToPolygon {
 
     }
 
-    public LinkedList<LinkedList<Pixel>> clusterToPolygonCorners(TreeSet<Pixel> cluster){
+    public LinkedList<LinkedList<Pixel>> clusterToPolygonCorners(TreeSet<Pixel> cluster) {
         TreeSet<Pixel> cornerPoints = clusterToPolygonCornerPoints(cluster);
         TreeSet<Pixel> unUsed = clusterToPolygonCornerPoints(cluster);
 
@@ -54,15 +53,14 @@ public class ImageToPolygon {
             Pixel startAndEnd = unUsed.first();
             Pixel p = unUsed.first();
 
-
             // logic for setting a valid starting direction
-            boolean lu = cluster.contains(new Pixel(p.getX()-1, p.getY()-1));
-            boolean ld = cluster.contains(new Pixel(p.getX()-1, p.getY()));
-            boolean ru = cluster.contains(new Pixel(p.getX(), p.getY()-1));
+            boolean lu = cluster.contains(new Pixel(p.getX() - 1, p.getY() - 1));
+            boolean ld = cluster.contains(new Pixel(p.getX() - 1, p.getY()));
+            boolean ru = cluster.contains(new Pixel(p.getX(), p.getY() - 1));
             boolean rd = cluster.contains(new Pixel(p.getX(), p.getY()));
             boolean edgeCase = (!lu && ld && ru && !rd) || (lu && !ld && !ru && rd);
             int ix, iy;
-            if (edgeCase || (rd && ld)){
+            if (edgeCase || (rd && ld)) {
                 ix = 0;
                 iy = 1;
             } else if (ru && lu) {
@@ -76,46 +74,46 @@ public class ImageToPolygon {
                 iy = -1;
             }
 
-            while(!p.equals(startAndEnd) || currentPoly.isEmpty()){
-                if (cornerPoints.contains(p)){
+            while (!p.equals(startAndEnd) || currentPoly.isEmpty()) {
+                if (cornerPoints.contains(p)) {
                     currentPoly.add(p);
-                    lu = cluster.contains(new Pixel(p.getX()-1, p.getY()-1));
-                    ld = cluster.contains(new Pixel(p.getX()-1, p.getY()));
-                    ru = cluster.contains(new Pixel(p.getX(), p.getY()-1));
+                    lu = cluster.contains(new Pixel(p.getX() - 1, p.getY() - 1));
+                    ld = cluster.contains(new Pixel(p.getX() - 1, p.getY()));
+                    ru = cluster.contains(new Pixel(p.getX(), p.getY() - 1));
                     rd = cluster.contains(new Pixel(p.getX(), p.getY()));
                     edgeCase = (!lu && ld && ru && !rd) || (lu && !ld && !ru && rd);
-                    if (ix == 1){
+                    if (ix == 1) {
                         ix = 0;
-                        if (edgeCase){
+                        if (edgeCase) {
                             iy = ru ? -1 : 1;
-                        } else if (ru && rd){
+                        } else if (ru && rd) {
                             iy = lu ? 1 : -1;
                         } else {
                             iy = lu ? -1 : 1;
                         }
-                    } else if (ix == -1){
+                    } else if (ix == -1) {
                         ix = 0;
-                        if (edgeCase){
+                        if (edgeCase) {
                             iy = ru ? 1 : -1;
-                        } else if (lu && ld){
+                        } else if (lu && ld) {
                             iy = ru ? 1 : -1;
                         } else {
                             iy = ru ? -1 : 1;
                         }
-                    } else if (iy == 1){
+                    } else if (iy == 1) {
                         iy = 0;
-                        if (edgeCase){
+                        if (edgeCase) {
                             ix = ru ? -1 : 1;
-                        } else if (rd && ld){
+                        } else if (rd && ld) {
                             ix = ru ? -1 : 1;
                         } else {
                             ix = ru ? 1 : -1;
                         }
-                    } else if (iy == -1){
+                    } else if (iy == -1) {
                         iy = 0;
-                        if (edgeCase){
+                        if (edgeCase) {
                             ix = ru ? 1 : -1;
-                        } else if (ru && lu){
+                        } else if (ru && lu) {
                             ix = rd ? -1 : 1;
                         } else {
                             ix = rd ? 1 : -1;
@@ -194,5 +192,7 @@ public class ImageToPolygon {
             }
             System.out.println("Progress: " + 100 * y / bmpToPick.height + "%");
         }
+        System.out.println("Progress: " + 100 + "%");
+        System.out.println(clusters.size() + " clusters detected");
     }
 }
