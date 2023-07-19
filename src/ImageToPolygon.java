@@ -17,12 +17,6 @@ public class ImageToPolygon {
         for (TreeSet<Pixel> cluster : clusters) {
             this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
         }
-        for (TreeSet<Pixel> cluster : cornerPointCluster) {
-            System.out.println("");
-            for (Pixel p : cluster) {
-                System.out.print(p.getX() + " / " + p.getY() + "; ");
-            }
-        }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToPolygon();
         // TODO: Beenden des Programmes
@@ -104,8 +98,7 @@ public class ImageToPolygon {
                     }
                 }
             }
+            System.out.println("Progress: " + 100 * y / bmpToPick.height + "%");
         }
-        // do whatever with the clusters
-        System.out.println(this.clusters.size());
     }
 }
