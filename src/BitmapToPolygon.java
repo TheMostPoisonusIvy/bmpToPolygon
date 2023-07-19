@@ -4,9 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class BitmapToPolygon {
-    public static double version = 0.04;
+    public static double version = 0.05;
     public static JFrame frame;
     public OptionsMenu mainMenu;
+    public ProgressScreen proScreen;
     public static JPanel mainPanel;
     public static int height, width;
     public static String bmpPath = null;
@@ -21,6 +22,7 @@ public class BitmapToPolygon {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocation(0, 0);
         mainMenu = new OptionsMenu();
+        proScreen = new ProgressScreen();
         mainPanel = mainMenu;
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.setVisible(true);

@@ -2,3 +2,8 @@
 0.02 - added further interface options
 0.03 - read bmp in int-array
 0.04 - detection of cluster and detection of cornerpoints
+0.05 - cornerpoints in an order to make polygons out of them
+0.06 - GUI finished
+
+Planing
+0.10 - Possibility to export the colors of the polygons in a seperate .csv-File
