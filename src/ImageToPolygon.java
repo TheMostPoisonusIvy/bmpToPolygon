@@ -20,6 +20,7 @@ public class ImageToPolygon {
     LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointCluster = new LinkedList<>();
 
     public ImageToPolygon(BitmapToPixelArray b) {
+        bmpToPick.j.setValue(0);
         this.bmpToPick = b;
         // Bilden der Gruppen
         manageSearch();
@@ -29,19 +30,13 @@ public class ImageToPolygon {
             this.cornerPointCluster.add(clusterToPolygonCorners(cluster));
             iterations++;
             bmpToPick.j.setValue((((100 * iterations / clusters.size())) / 2) + 50);
+            bmpToPick.j.repaint();
         }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToCSV(cornerPointCluster);
     }
 
     public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
-        System.out.println("Finished");
-        // Da lastIndexOf buggy war
-        for (int i = bmpToPick.pathToFile.length() - 1; i > 0; i--) {
-            if (bmpToPick.pathToFile.charAt(i) == '/') {
-                System.out.println(i);
-            }
-        }
         String pathStringWithCSV = new StringBuilder(bmpToPick.pathToFile)
                 .delete(bmpToPick.pathToFile.length() - 4, bmpToPick.pathToFile.length()).append(".csv").toString();
         System.out.println(pathStringWithCSV);
