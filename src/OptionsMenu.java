@@ -28,12 +28,9 @@ public class OptionsMenu extends JPanel {
     JTextField pixelSizeInput;
     public JProgressBar calcProgress;
 
-    public void formatC(int x, int y) {
-        c.gridx = x;
-        c.gridy = y;
-    }
-
-    // constructor
+    /**
+     * Constructor for the menu
+     */
     public OptionsMenu() {
         setLayout(new BorderLayout());
 
@@ -97,6 +94,11 @@ public class OptionsMenu extends JPanel {
 
     }
 
+    /**
+     * A function to test if the input in pixelSizeInput is a float, or can be
+     * parsed to be one.
+     */
+
     public void confirmDoubleInput() {
         try {
             String f = pixelSizeInput.getText();
@@ -116,6 +118,10 @@ public class OptionsMenu extends JPanel {
         }
     }
 
+    /**
+     * To test the input, if a bmp-file is provided and if the inputs are okay
+     * before starting calculations
+     */
     public void confirmation() {
         if (BitmapToPolygon.bmpPath != null) {
             confirmDoubleInput();
@@ -141,11 +147,23 @@ public class OptionsMenu extends JPanel {
         return j;
     }
 
+    /**
+     * Helper-function to format the Gridbagconstraints in a single line
+     * 
+     * @param x
+     * @param y
+     */
+
+    public void formatC(int x, int y) {
+        c.gridx = x;
+        c.gridy = y;
+    }
+
+    /**
+     * Override-function to repaint the panel
+     */
     @Override
     protected void paintComponent(Graphics g) {
-        // backGround = backGround.getScaledInstance(getParent().getWidth(),
-        // getParent().getHeight(), ABORT);
         super.paintComponent(g);
-        // g.drawImage(backGround, 0, 0, null);
     }
 }
