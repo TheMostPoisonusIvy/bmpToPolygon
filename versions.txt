@@ -4,6 +4,7 @@
 0.04 - detection of cluster and detection of cornerpoints
 0.05 - cornerpoints in an order to make polygons out of them
 0.06 - GUI finished
+0.07 - rework of GUI / comment out all the code
 
 Planing
 0.10 - show path to file in working window and make a copyable path 
