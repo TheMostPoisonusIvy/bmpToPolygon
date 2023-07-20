@@ -1,16 +1,10 @@
 package src;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.JPanel;
 
 /**
  * The main calculation class to transform the bitmap to transform the Bitmap to
@@ -38,8 +32,6 @@ public class ImageToPolygon {
         }
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToCSV(cornerPointCluster);
-        // TODO: Beenden des Programmes
-        // System.exit(200);
     }
 
     public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
