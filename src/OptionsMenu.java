@@ -13,7 +13,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -73,7 +72,7 @@ public class OptionsMenu extends JPanel {
 
     // open the file chooser dialog
     public void openFileChooser() {
-        jfc = new JFileChooser("Z:\\workspace Eclipse\\workspace\\PVL-Nachteilsausgleich\\bin");
+        jfc = new JFileChooser("H:\\Private Dateien\\_me\\bmpToPolygon\\images");
         jfc.addChoosableFileFilter(new FileFilter() {
             public String getDescription() {
                 return "Bitmaps (*.bmp)";

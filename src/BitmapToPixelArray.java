@@ -11,6 +11,7 @@ public class BitmapToPixelArray {
     public Pixel[][] pickselBild;
     public int height, width;
     public float pixelSize;
+    public String pathToFile;
     BufferedImage bfr;
     ImageToPolygon p;
     JProgressBar j;
@@ -19,7 +20,8 @@ public class BitmapToPixelArray {
         try {
             this.j = jPro;
             this.pixelSize = size;
-            System.out.println(size);
+            this.pathToFile = s;
+            System.out.println(s);
             this.bfr = ImageIO.read(new File(s));
             this.height = bfr.getHeight();
             this.width = bfr.getWidth();

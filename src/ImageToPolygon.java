@@ -1,5 +1,8 @@
 package src;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeSet;
@@ -33,7 +36,6 @@ public class ImageToPolygon {
             iterations++;
             bmpToPick.j.setValue((((100 * iterations / clusters.size())) / 2) + 50);
         }
-
         // Abspeichern einer jeden Gruppe, bzw. deren Kanten, als Polygon
         safeToCSV(cornerPointCluster);
         // TODO: Beenden des Programmes
@@ -42,6 +44,32 @@ public class ImageToPolygon {
 
     public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
         System.out.println("Finished");
+        // Da lastIndexOf buggy war
+        for (int i = bmpToPick.pathToFile.length() - 1; i > 0; i--) {
+            if (bmpToPick.pathToFile.charAt(i) == '/') {
+                System.out.println(i);
+            }
+        }
+        String pathStringWithCSV = new StringBuilder(bmpToPick.pathToFile)
+                .delete(bmpToPick.pathToFile.length() - 4, bmpToPick.pathToFile.length()).append(".csv").toString();
+        System.out.println(pathStringWithCSV);
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(pathStringWithCSV);
+        } catch (Exception e) {
+        }
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.write("Easting, Northing\n");
+        for (LinkedList<LinkedList<Pixel>> polygonGroup : cornerPointClusters) {
+            for (LinkedList<Pixel> polygon : polygonGroup) {
+                for (Pixel p : polygon) {
+                    printWriter.write(p.getX() + "," + p.getY() + ";\n");
+                }
+                printWriter.write("\n");
+            }
+
+        }
+        printWriter.close();
     }
 
     public LinkedList<LinkedList<Pixel>> clusterToPolygonCorners(TreeSet<Pixel> cluster) {
