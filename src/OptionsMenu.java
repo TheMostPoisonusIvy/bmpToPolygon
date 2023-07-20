@@ -72,7 +72,7 @@ public class OptionsMenu extends JPanel {
 
     // open the file chooser dialog
     public void openFileChooser() {
-        jfc = new JFileChooser("H:\\Private Dateien\\_me\\bmpToPolygon\\images");
+        jfc = new JFileChooser();
         jfc.addChoosableFileFilter(new FileFilter() {
             public String getDescription() {
                 return "Bitmaps (*.bmp)";
