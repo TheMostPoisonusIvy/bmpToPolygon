@@ -19,6 +19,11 @@ public class ImageToPolygon {
     LinkedList<TreeSet<Pixel>> clusters;
     LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointCluster = new LinkedList<>();
 
+    /**
+     * Constructor. Given with a passed on BitMapToPixelArray.
+     * 
+     * @param b
+     */
     public ImageToPolygon(BitmapToPixelArray b) {
         this.bmpToPick = b;
         bmpToPick.j.setValue(0);
@@ -53,7 +58,7 @@ public class ImageToPolygon {
         } catch (Exception e) {
         }
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.write("Easting, Northing\n");
+        printWriter.write("Easting, Northing, innerPolygon, outerPolygon\n");
         for (LinkedList<LinkedList<Pixel>> polygonGroup : cornerPointClusters) {
             for (LinkedList<Pixel> polygon : polygonGroup) {
                 for (Pixel p : polygon) {
