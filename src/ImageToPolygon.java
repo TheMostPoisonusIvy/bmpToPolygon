@@ -20,8 +20,8 @@ public class ImageToPolygon {
     LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointCluster = new LinkedList<>();
 
     public ImageToPolygon(BitmapToPixelArray b) {
-        bmpToPick.j.setValue(0);
         this.bmpToPick = b;
+        bmpToPick.j.setValue(0);
         // Bilden der Gruppen
         manageSearch();
         // Erkennen der Kanten der Gruppen
