@@ -36,6 +36,13 @@ public class ImageToPolygon {
         safeToCSV(cornerPointCluster);
     }
 
+    /**
+     * Writes the detected cornerpointclusters in a .csv-file with the same filename
+     * as the image / in the same repository.
+     * 
+     * @param cornerPointClusters
+     */
+
     public void safeToCSV(LinkedList<LinkedList<LinkedList<Pixel>>> cornerPointClusters) {
         String pathStringWithCSV = new StringBuilder(bmpToPick.pathToFile)
                 .delete(bmpToPick.pathToFile.length() - 4, bmpToPick.pathToFile.length()).append(".csv").toString();
